@@ -10,9 +10,10 @@ p {
   border-style: solid;
   width: 75%;
   margin:auto;
-}
-.selected {
+
+  &.selected {
   background: yellow;
+}
 }
 
 .profileImage {

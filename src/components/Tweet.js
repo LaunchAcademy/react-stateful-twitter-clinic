@@ -1,39 +1,39 @@
 import React from 'react'
 
 const Tweet = props => {
-  let text = props.text
-  let name = props.user.name
-  let screenName = props.user.screen_name
-  let profileImageURL = props.user.profile_image_url
-  let retweetCount = props.retweetCount
-  let favoriteCount = props.favoriteCount
+  let text = props.tweet.text
+  let name = props.tweet.user.name
+  let screenName = props.tweet.user.screen_name
+  let profileImageURL = props.tweet.user.profile_image_url
+  let retweetCount = props.tweet.retweetCount
+  let favoriteCount = props.tweet.favoriteCount
   let tweetMediaURL = ""
-   if (props.entities.media) {
-     tweetMediaURL = props.entities.media[0].media_url
+   if (props.tweet.entities.media) {
+     tweetMediaURL = props.tweet.entities.media[0].media_url
 
    }
 
   let tweetDisplayURL = ""
-  if (props.entities.media) {
-    tweetDisplayURL = props.entities.media[0].display_url
+  if (props.tweet.entities.media) {
+    tweetDisplayURL = props.tweet.entities.media[0].display_url
 
   }
   if (tweetDisplayURL != "") {
-    text = props.text.replace(tweetDisplayURL, "")
+    text = props.tweet.text.replace(tweetDisplayURL, "")
   }
 
   let favoritedFlag;
-  if ( props.favorited) {
+  if ( props.tweet.favorited) {
       favoritedFlag = "favorite"}
 
 
   let retweetedFlag;
-  if (props.retweeted) {
+  if (props.tweet.retweeted) {
     retweetedFlag = "retweeted"
   }
 
-  let requested = props.requested
-  let date = new Date(+props.timestampMs)
+  let requested = props.tweet.requested
+  let date = new Date(+props.tweet.timestampMs)
   let month = date.toLocaleString("en-us", {month: "short"})
   let day = date.getDate()
 
@@ -59,12 +59,12 @@ const Tweet = props => {
   }
 
   return(
-    <div className="tweet">
+    <div onClick={props.handleClick} className={`tweet ${props.className}`}>
       <div className="profileImage">
         <img src={profileImageURL} className="profilePic" />
       </div>
       <p>{name} @ {screenName} * {month} {day} </p>
-      <span className = "tweetContent">
+      <span className = "tweetContent selected">
         {text}
       </span>
 
